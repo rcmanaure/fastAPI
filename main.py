@@ -9,8 +9,8 @@ from src.routes.roles import role_router
 
 setup_logger()
 app = FastAPI(
-    title="Cleaning Service API",
-    description="API for managing cleaning service",
+    title="FastAPI Documentation",
+    description="API Documentation for FastAPI",
     version="0.1",
     swagger_ui_parameters={
         "filter": True,
