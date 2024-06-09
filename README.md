@@ -1,4 +1,5 @@
 # Backend
+
 # FastAPI
 
 ## To run in local (this way if you want run the backend directly from terminal):
@@ -10,8 +11,8 @@
 - start redis: `docker-compose up -d redis`
 - run migrations: `alembic upgrade head`
 - run api (one of these):
-    - `python app/main.py`
-    - `uvicorn app.main:app --host localhost --port 8000 --reload`
+  - `python app/main.py`
+  - `uvicorn app.main:app --host localhost --port 8000 --reload`
 
 ## To run containers in local:
 
@@ -38,7 +39,7 @@ https://pre-commit.com/index.html
 
 - install pre-commit hooks: `pre-commit install` (will run them on every commit)
 - it's recommended to run all pre-commit hooks before push to avoid errors in the CI/CD pipeline.
-    - `pre-commit run --all-files`
+  - `pre-commit run --all-files`
 
 ## Pytest
 
@@ -47,13 +48,3 @@ https://pre-commit.com/index.html
 # Logging
 
 - use logging and use it instead print. Example: `logging.debug("debugging")`
-
-# Pgadmin
-
-- `docker-compose up -d pgadmin`
-- http://localhost:8888/. Enter the username and password for PGAdmin.
-- Now, connect to the PostgreSQL Database using DB credentials.
-
-# Seeder
-
-`python -m app.utils.seeder.run`
