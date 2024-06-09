@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
@@ -8,7 +8,6 @@ from src.authentication import create_token
 from src.db import get_db
 from src.dtos.authentication.user import UserJwtPayload
 from src.models.user import User
-from fastapi_login.exceptions import InvalidCredentialsException
 from src.config.settings import settings
 from src.authentication.validators import verify_password
 
@@ -25,11 +24,11 @@ def login(
         user = db.query(User).filter_by(username=form_data.username).first()
         if not user:
             # you can return any response or error of your choice
-            raise InvalidCredentialsException
+            raise HTTPException(status_code=404, detail="User not found")
         elif verify_password(form_data.password, user.password) is False:
-            raise InvalidCredentialsException
+            raise HTTPException(status_code=400, detail="Invalid password") 
         elif user.is_active is False:
-            raise InvalidCredentialsException
+            raise HTTPException(status_code=400, detail="User is not active")
 
     except SQLAlchemyError as error:
         raise error
